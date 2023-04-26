@@ -40,12 +40,16 @@
     a:hover{
       color: rgba(26, 24, 24, 0.574);
     }
+    img:hover{
+      transform: scale(1.1);
+    }
     .body .t1,.t2,.t3,.t4{
       float: left;
       width: 200px;
       height: 400px;
       background-color: #fff;
       margin: 40px 20px;
+      overflow: hidden;
     }
     .body img{
       width: 100%;
@@ -70,6 +74,17 @@
     .t4 .intro4{
       padding:0 10px;
     }
+    .btn{
+      position: fixed;
+      top:300px;
+      left: 100px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+    body,img{
+      transition: all .4s;
+    }
   </style>
 </head>
 <body>
@@ -77,6 +92,7 @@
     <h1>欢迎来到这个网站</h1>
     <div class="ps">——不好看</div>
   </div>
+  <button class="btn" onclick="myfunction"></button>
   <div class="body">
     <div>
       <h4 class="novel">小说推荐</h4>
@@ -125,3 +141,16 @@
   </div>
 </body>
 </html>
+<script>
+  var button = document.querySelector("button");
+  button.onclick = function()
+  {
+    var red = Math.floor(Math.random() * 256);
+  var green = Math.floor(Math.random() * 256);
+  var blue = Math.floor(Math.random() * 256);
+  var color = "rgb(" + red + ", " + green + ", " + blue + ")";
+  
+  // 设置页面背景颜色为随机颜色
+  document.body.style.backgroundColor = color;
+  }
+</script>
