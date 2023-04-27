@@ -49,7 +49,7 @@
       height: 400px;
       background-color: #fff;
       margin: 40px 20px;
-      overflow: hidden;
+      
     }
     .body img{
       width: 100%;
@@ -62,17 +62,16 @@
       float:right;
       margin-bottom:20px;
     }
-    .t1 .intro1{
-      padding:0 10px;
-    }
-    .t2 .intro2{
-      padding:0 10px;
-    }
-    .t3 .intro3{
-      padding:0 10px;
-    }
+    .t1 .intro1,
+    .t2 .intro2
+    ,.t3 .intro3,
     .t4 .intro4{
       padding:0 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
     }
     .btn{
       position: fixed;
@@ -81,13 +80,23 @@
       width: 20px;
       height: 20px;
       border-radius: 50%;
+      background-color: orange;
     }
     body,img{
       transition: all .4s;
     }
+    .time{
+      position: fixed;
+      top:10%;
+      left: 10%;
+      color:red;
+      font-size: 18px;
+      font-weight: 700;
+    }
   </style>
 </head>
-<body>
+<body onload="Time()" onloadstart="remind()">
+  
   <div class="title">
     <h1>欢迎来到这个网站</h1>
     <div class="ps">——不好看</div>
@@ -104,11 +113,12 @@
       </ul>
     </div>
     <div class="t1">
-      <div class="link1"><a href="https://book.qidian.com/info/1012584111/"><img src="https://bookcover.yuewen.com/qdbimg/349573/1012584111/180.webp" alt="神秘复苏">
+      <div class="link1"><a href="https://book.qidian.com/info/1012584111/" target="_blank"><img src="https://bookcover.yuewen.com/qdbimg/349573/1012584111/180.webp" alt="神秘复苏">
       </a></div>
       <div class="intro1">
         <p><b>简介</b></p>
-        <p>&nbsp;&nbsp;“我叫杨间，当你看到这句话的时候我已经死了......”</p>
+        <p>&nbsp;&nbsp;“我叫杨间，当你看到这句话的时候我已经死了......”<br>
+          一张诡异的羊皮卷，一只窥视黑暗的眼睛，这是一个活下来的人经历的故事。</p>
       </div>
     </div>
     <div class="t2">
@@ -116,14 +126,14 @@
         <a href="https://book.qidian.com/info/1012284323/" target="_blank"><img src="https://bookcover.yuewen.com/qdbimg/349573/1012284323/180.webp" alt=""></a>
       </div>
       <div class="intro2"><p><b>简介</b></p>
-        <p>&nbsp;&nbsp;陈歌继承了失踪父母留下的冒险屋，意外发现的手机改变了这一切。</p></div>
+        <p>&nbsp;&nbsp;陈歌继承了失踪父母留下的冒险屋，无奈生意萧条，直到整理冒险屋时意外发现的手机改变了这一切。<br>只要完成手机每日布置的不同难度的任务，冒险屋就能得到修缮甚至扩建！<br>于是陈歌开始在各大禁地里探险取材，将其中场景元素纳入到自己的冒险屋中。随着前来参观的游客们各种惊声尖叫，冒险屋一举成名！然而虽然任务带来的好处越来越多，但其中隐患也慢慢显现，甚至父母失踪的线索似乎也藏其中……</p></div>
     </div>
     <div class="t3">
       <div class="link3">
         <a href="https://book.qidian.com/info/1031794030/" target="_blank"><img src="https://bookcover.yuewen.com/qdbimg/349573/1031794030/150.webp" alt=""></a>
       </div>
       <div class="intro3"><p><b>简介</b></p>
-        <p>&nbsp;&nbsp;诡异的天道，异常的仙佛，是真？是假？陷入迷惘的李火旺无法分辨。</p></div>
+        <p>&nbsp;&nbsp;诡异的天道，异常的仙佛，是真？是假？ 陷入迷惘的李火旺无法分辨。<br> 可让他无法分辨的不仅仅只是这些。还有他自己，他病了，病的很重。</p></div>
     </div>
     <div class="t4">
       <div class="link4">
@@ -136,12 +146,25 @@
     </div>
     <div class="clear"></div>
   </div>
+  <div>
+
+  </div>
   <div class="tail">
     感觉写的很丑az
   </div>
+  <p id="time" class="time"></p>
 </body>
 </html>
 <script>
+  function remind()
+  {
+    let time = new Date();
+    let h = time.getHours();
+    if(h >=23 || h <= 4)
+    {
+      alter("时间已经很晚啦，注意休息哟");
+    }
+  }
   var button = document.querySelector("button");
   button.onclick = function()
   {
@@ -149,8 +172,27 @@
   var green = Math.floor(Math.random() * 256);
   var blue = Math.floor(Math.random() * 256);
   var color = "rgb(" + red + ", " + green + ", " + blue + ")";
-  
   // 设置页面背景颜色为随机颜色
   document.body.style.backgroundColor = color;
+  }
+  function Time()
+  {
+    let td = new Date();
+    let h = td.getHours();
+    let m = td.getMinutes();
+    let s = td.getSeconds();
+    m = check(m);
+    s = check(s);
+    h = check(h);
+    document.getElementById("time").innerHTML = h + ":" + m + ":" + s;
+    t = setTimeout(function(){Time()},500);
+  }
+  function check(u)
+  {
+    if(u<10)
+    {
+      u = "0" + u;
+    }
+    return u;
   }
 </script>
